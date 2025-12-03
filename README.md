@@ -212,7 +212,7 @@ ABC123 | Toyota Corolla | 2022 | AVAILABLE | Driver: -
 **Institution:** Batangas State University  
 **Date:** December 2025
 
-Special thanks to our instructors and classmates for their guidance and support throughout this project.
+Special thanks to our instructor Ms. Christiana Grace Alib.
 
 ---
 
