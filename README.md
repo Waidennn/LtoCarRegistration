@@ -444,8 +444,8 @@ This is an academic project, but feedback and suggestions are welcome! Feel free
 ## 📞 Contact
 
 For questions or collaboration:
-- **GitHub:** [Your GitHub Profile]
-- **Email:** [Your Email]
+- **GitHub:** MikkoGarcia, Waidennn, ZeusDave
+- **Email:** 24-02205@g.batstate-u.edu.ph , 24-01367@g.batstate-u.edu.ph , 24-04169@g.batstate-u.edu.ph
 
 ---
 
