@@ -44,7 +44,6 @@ Manual car rental tracking is inefficient and prone to errors. This system solve
 - View all registered users
 - Add cars to user accounts
 - Delete cars from user accounts
-- Access comprehensive audit logs
 - Secure admin registration with secret code (`LTO-ADMIN-2025`)
 
 ### 👤 User Features
