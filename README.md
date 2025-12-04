@@ -196,7 +196,7 @@ javac -version
 
 ### Prerequisites Setup
 
-1. **Ensure proper folder structure:**
+**Ensure proper folder structure:**
    ```
    LTOCarRental/
    ├── src/
@@ -207,20 +207,6 @@ javac -version
    │   ├── data/
    │   └── Main.java
    └── bin/ (will be created during compilation)
-   ```
-
-2. **Important: Rename database.java to Database.java**
-   
-   The filename must match the class name exactly (case-sensitive):
-   
-   **Windows PowerShell:**
-   ```powershell
-   Rename-Item src\data\database.java Database.java
-   ```
-   
-   **Mac/Linux:**
-   ```bash
-   mv src/data/database.java src/data/Database.java
    ```
 
 ### Compilation Steps
