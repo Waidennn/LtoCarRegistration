@@ -1,20 +1,74 @@
-# LTO Car Rental Registration & Monitoring System
+# 🚗 LTO Car Rental Registration & Monitoring System
 
-## Description/Overview
+[![Java](https://img.shields.io/badge/Java-11+-orange.svg)](https://www.oracle.com/java/)
+[![License](https://img.shields.io/badge/License-Educational-blue.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Active-success.svg)]()
 
-The LTO Car Rental Registration & Monitoring System is a command-line interface (CLI) application designed to streamline car rental management operations. This system enables administrators to oversee user accounts and vehicle registrations, while allowing regular users to manage their car inventory, track rental status, and maintain driver information. 
+A command-line interface (CLI) application designed to streamline car rental management operations with secure authentication, real-time rental tracking, and comprehensive audit logging.
 
-The application solves the problem of manual car rental tracking by providing secure authentication, real-time rental status updates, automated driver code generation, and comprehensive audit logging for accountability and monitoring.
+---
+
+## Table of Contents
+
+- [Description](#-description)
+- [Features](#-features)
+- [OOP Concepts Applied](#-oop-concepts-applied)
+- [Program Structure](#-program-structure)
+- [Installation & Setup](#-installation--setup)
+- [How to Run](#-how-to-run)
+- [Usage Guide](#-usage-guide)
+- [Sample Output](#-sample-output)
+- [Authors](#-authors)
+- [Future Enhancements](#-future-enhancements)
+- [References](#-references)
+- [License](#-license)
+
+---
+
+## 📖 Description
+
+The **LTO Car Rental Registration & Monitoring System** is a Java-based application that enables administrators to oversee user accounts and vehicle registrations, while allowing regular users to manage their car inventory, track rental status, and maintain driver information.
+
+### Problem Statement
+Manual car rental tracking is inefficient and prone to errors. This system solves that by providing:
+- Secure authentication with SHA-256 password hashing
+- Real-time rental status updates
+- Automated driver code generation
+- Comprehensive audit logging for accountability
+
+---
+
+## ✨ Features
+
+### 👨‍💼 Admin Features
+- View all registered users
+- Add cars to user accounts
+- Delete cars from user accounts
+- Access comprehensive audit logs
+- Secure admin registration with secret code (`LTO-ADMIN-2025`)
+
+### 👤 User Features
+- View personal car inventory
+- Add new cars to account
+- Rent out cars to drivers with unique codes
+- Complete rental transactions
+- Track rental status (AVAILABLE/RENTED)
+
+### System Features
+- SHA-256 password hashing for security
+- Audit logging for all transactions
+- Role-based authentication (Admin/User)
+- Unique 8-character driver code generation
+- Duplicate plate number prevention
 
 ---
 
 ## OOP Concepts Applied
 
-### 1. Inheritance
+### 1️⃣ Inheritance
 
-The project implements a hierarchical class structure with an abstract `Account` class serving as the parent for two child classes: `AdminAccount` and `UserAccount`. Both subclasses inherit common properties (`username`, `passwordHash`, `role`) and methods (`getUsername()`, `getPasswordHash()`, `getRole()`) while providing their own implementations of the abstract `showDashboard()` method.
+The project implements a hierarchical class structure with an abstract `Account` class serving as the parent for `AdminAccount` and `UserAccount`.
 
-**Code Example:**
 ```java
 abstract class Account {
     protected String username;
@@ -39,11 +93,10 @@ class UserAccount extends Account {
 }
 ```
 
-### 2. Polymorphism
+### 2️⃣ Polymorphism
 
-Polymorphism is demonstrated through method overriding, where both `AdminAccount` and `UserAccount` provide their own implementations of the abstract `showDashboard()` method from the parent `Account` class. The `toString()` method is also overridden in both `Car` and `DriverInfo` classes to provide custom string representations.
+Method overriding demonstrates polymorphism - both account types provide their own implementations of `showDashboard()`.
 
-**Code Example:**
 ```java
 // Polymorphic behavior
 Account account = authService.login();
@@ -52,11 +105,10 @@ if (account != null) {
 }
 ```
 
-### 3. Encapsulation
+### 3️⃣ Encapsulation
 
-Private and protected access modifiers encapsulate data within classes. For example, the `Account` class uses `protected` fields for `username`, `passwordHash`, and `role`, accessible only within the class hierarchy, while the `Car` class uses `private` fields like `plateNumber`, `brand`, `model`, and `year` with public getter methods providing controlled access.
+Private and protected access modifiers encapsulate data with controlled access through getter methods.
 
-**Code Example:**
 ```java
 class Car {
     private final String plateNumber;
@@ -70,11 +122,10 @@ class Car {
 }
 ```
 
-### 4. Abstraction
+### 4️⃣ Abstraction
 
-The abstract `Account` class defines the contract for all account types through the abstract `showDashboard()` method, hiding implementation details from the main application logic. Service classes (`AuthService`, `AdminService`, `UserService`) abstract complex business logic operations, separating concerns from the presentation layer.
+Abstract classes and service layers hide implementation details from the main application logic.
 
-**Code Example:**
 ```java
 abstract class Account {
     public abstract void showDashboard(); // Contract for all accounts
@@ -89,91 +140,211 @@ abstract class Account {
 
 | Class | Role |
 |-------|------|
-| **LtoCarRental** | Entry point class containing the main method that initializes and runs the application |
-| **App** | Manages the main application loop and displays the primary menu for login, registration, audit logs, and exit options |
-| **Account** (abstract) | Base class defining common properties and behaviors for all account types with an abstract `showDashboard()` method |
-| **AdminAccount** | Extends Account to provide administrative privileges including user management, car assignment/deletion, and audit log access |
-| **UserAccount** | Extends Account to allow users to manage their personal car inventory and rental operations |
-| **Car** | Represents a vehicle with properties like plate number, brand, model, year, rental status, and associated driver information |
-| **DriverInfo** | Stores driver details including name, license number, and a unique rental code |
-| **Database** | Simulates a database using static lists to store accounts and audit logs, pre-seeded with default admin and user accounts |
-| **AuthService** | Handles user authentication, registration for both users and admins with password hashing via SHA-256 |
-| **AdminService** | Provides administrative functionality including viewing users, managing cars, and accessing audit logs |
-| **UserService** | Manages user-specific operations such as viewing cars, adding cars, marking rentals, and completing rentals |
-| **HashUtil** | Utility class for SHA-256 password hashing to ensure secure credential storage |
-| **CodeGenerator** | Generates unique 8-character alphanumeric codes for driver identification |
+| **Main** | Entry point containing the main method that starts the application |
+| **AuthService** | Handles user authentication and registration for both users and admins |
+| **AdminService** | Provides administrative functionality and menu operations |
+| **UserService** | Manages user-specific operations and menu |
+| **Account** (abstract) | Base class for all account types with abstract showDashboard() |
+| **AdminAccount** | Administrative privileges and operations |
+| **UserAccount** | User-specific car and rental management |
+| **Car** | Vehicle entity with rental status tracking |
+| **DriverInfo** | Driver details with unique rental codes |
+| **Database** | In-memory storage for accounts and audit logs |
+| **HashUtil** | SHA-256 password hashing utility |
+| **CodeGenerator** | Unique driver code generation |
 
-### Class Relationships
+### Project Architecture
 
 ```
-LtoCarRental (main class)
-  └── App
-       ├── AuthService
-       └── Account (abstract)
-            ├── AdminAccount
-            │    └── AdminService
-            └── UserAccount
-                 ├── UserService
-                 └── Car
-                      └── DriverInfo
-
-Database (static storage)
-HashUtil (utility)
-CodeGenerator (utility)
+src/
+├── accounts/
+│   ├── Account.java          # Abstract base class
+│   ├── AdminAccount.java     # Admin implementation
+│   └── UserAccount.java      # User implementation
+├── models/
+│   ├── Car.java              # Car entity
+│   └── DriverInfo.java       # Driver information
+├── services/
+│   ├── AdminService.java     # Admin operations
+│   ├── AuthService.java      # Authentication
+│   └── UserService.java      # User operations
+├── utils/
+│   ├── CodeGenerator.java    # Code generation
+│   └── HashUtil.java         # Password hashing
+├── data/
+│   └── Database.java         # Data storage
+└── Main.java                 # Application entry point
 ```
 
 ---
 
-## How to Run the Program
+## Installation & Setup
 
-Follow these step-by-step instructions to compile and run the program from the command line:
+### Prerequisites
+- **Java Development Kit (JDK) 11 or higher**
+- Command line interface (CMD, PowerShell, Terminal)
 
-### Step 1: Ensure Java is Installed
-Verify that Java Development Kit (JDK) 11 or higher is installed by running:
+### Verify Java Installation
 ```bash
 java -version
+javac -version
 ```
 
-### Step 2: Save the File
-Ensure the file is saved as `LtoCarRental.java` in your working directory.
+---
 
-### Step 3: Compile the Program
-Navigate to the directory containing the file and run:
+## 🚀 How to Run
+
+### Prerequisites Setup
+
+1. **Ensure proper folder structure:**
+   ```
+   LTOCarRental/
+   ├── src/
+   │   ├── accounts/
+   │   ├── models/
+   │   ├── services/
+   │   ├── utils/
+   │   ├── data/
+   │   └── Main.java
+   └── bin/ (will be created during compilation)
+   ```
+
+2. **Important: Rename database.java to Database.java**
+   
+   The filename must match the class name exactly (case-sensitive):
+   
+   **Windows PowerShell:**
+   ```powershell
+   Rename-Item src\data\database.java Database.java
+   ```
+   
+   **Mac/Linux:**
+   ```bash
+   mv src/data/database.java src/data/Database.java
+   ```
+
+### Compilation Steps
+
+1. **Navigate to project root directory:**
+   ```bash
+   cd path/to/LTOCarRental
+   ```
+
+2. **Compile all Java files:**
+   
+   **Windows:**
+   ```powershell
+   javac -d bin -sourcepath src src\Main.java src\accounts\*.java src\models\*.java src\services\*.java src\utils\*.java src\data\*.java
+   ```
+   
+   **Mac/Linux:**
+   ```bash
+   javac -d bin -sourcepath src src/Main.java src/accounts/*.java src/models/*.java src/services/*.java src/utils/*.java src/data/*.java
+   ```
+
+3. **Run the application:**
+   ```bash
+   java -cp bin Main
+   ```
+
+### Alternative: Single File Version
+
+If you prefer a simpler approach without package structure, you can use the all-in-one file:
+
 ```bash
 javac LtoCarRental.java
-```
-
-### Step 4: Run the Program
-After successful compilation, execute:
-```bash
 java LtoCarRental
 ```
 
-### Step 5: Default Credentials
-The system is pre-seeded with:
-- **Admin** - Username: `admin`, Password: `admin123`
-- **User** - Username: `user`, Password: `user123`
+**Note:** This project uses the multi-file structure with `Main.java` as the entry point.
+
+---
+
+## 📚 Usage Guide
+
+### Default Credentials
+
+The system does **not** come with pre-seeded accounts. You need to register first:
+
+| Action | Steps |
+|--------|-------|
+| **Register User** | Choose option 2 → Enter username and password |
+| **Register Admin** | Choose option 3 → Enter secret code: `LTO-ADMIN-2025` → Enter username and password |
+| **Login** | Choose option 1 → Enter your credentials |
+
+### Main Menu Options
+
+```
+1. Login
+2. Register User
+3. Register Admin (requires secret code: LTO-ADMIN-2025)
+4. View Audit Logs (admin only)
+5. Exit
+```
+
+### Admin Dashboard
+
+```
+1. View All Users
+2. Add Car To User
+3. Delete Car From User
+4. View Audit Logs
+5. Logout
+```
+
+### User Dashboard
+
+```
+1. View My Cars
+2. Add Car (to my account)
+3. Mark Car as Rented
+4. Mark Rental as Completed
+5. Logout
+```
+
+### Sample Workflow
+
+1. **Register as User** → Create account with username and password
+2. **Login as User** → Access user dashboard
+3. **Add a Car** → Enter plate number, brand, model, and year
+4. **Rent the Car** → Provide driver name and license number
+5. **Complete Rental** → Mark car as available again
 
 ---
 
 ## Sample Output
 
 ```
-Starting LTO Car Rental System (single-file demo).
+====================================
+   LTO CAR RENTAL SYSTEM
+====================================
 
---- LTO CAR RENTAL SYSTEM ---
+--- MAIN MENU ---
 1. Login
 2. Register User
-3. Register Admin (requires secret)
-4. View Audit Logs (admin only)
+3. Register Admin
+4. View Audit Logs
+5. Exit
+Choose: 2
+
+New username: john
+New password: pass123
+User created!
+
+--- MAIN MENU ---
+1. Login
+2. Register User
+3. Register Admin
+4. View Audit Logs
 5. Exit
 Choose: 1
 
-Enter username: user
-Enter password: user123
-Login successful. Role: USER
+Enter username: john
+Enter password: pass123
 
---- USER MENU (user) ---
+Welcome, john!
+
+--- USER MENU (john) ---
 1. View My Cars
 2. Add Car (to my account)
 3. Mark Car as Rented
@@ -187,7 +358,7 @@ Model: Corolla
 Year: 2022
 Car added to your account.
 
---- USER MENU (user) ---
+--- USER MENU (john) ---
 1. View My Cars
 2. Add Car (to my account)
 3. Mark Car as Rented
@@ -196,55 +367,106 @@ Car added to your account.
 Choose: 1
 
 --- MY CARS ---
-ABC123 | Toyota Corolla | 2022 | AVAILABLE | Driver: -
+ABC123 | Toyota Corolla (2022) | Status: AVAILABLE | Driver: None
+
+--- USER MENU (john) ---
+1. View My Cars
+2. Add Car (to my account)
+3. Mark Car as Rented
+4. Mark Rental as Completed
+5. Logout
+Choose: 3
+
+Enter plate number: ABC123
+Driver Name: Juan Dela Cruz
+License No: N01-23-456789
+Car rented! Unique Code: 7A3F9B2E
+
+--- USER MENU (john) ---
+Choose: 1
+
+--- MY CARS ---
+ABC123 | Toyota Corolla (2022) | Status: RENTED | Driver: Juan Dela Cruz | License: N01-23-456789 | Code: 7A3F9B2E
+
+--- USER MENU (john) ---
+Choose: 5
+
+--- MAIN MENU ---
+Choose: 5
+
+Thank you for using LTO Car Rental System!
+Goodbye!
 ```
 
 ---
 
-## Authors and Acknowledgements
+## 👥 Authors
 
-**Project Members:**
-- Zeus Dave De Chavez
-- Mikko Garcia
-- Don Mclaire Gonzales
+**Project Team:**
+- **Zeus Dave De Chavez** - Developer
+- **Mikko Garcia** - Developer
+- **Don Mclaire Gonzales** - Developer
 
-**Course:** IT-2111 Object Oriented Programming  
-**Institution:** Batangas State University  
-**Date:** December 2025
-
-Special thanks to our instructor Ms. Christiana Grace Alib.
-
----
-
-## Future Enhancements
-
-- Implement persistent database storage using MySQL or PostgreSQL instead of in-memory lists
-- Add a graphical user interface (GUI) using JavaFX or Swing
-- Implement rental pricing calculations and payment tracking
-- Add date/time tracking for rental periods with automatic late fee calculation
-- Implement search and filter capabilities for cars and users
-- Add email notifications for rental confirmations and reminders
-- Export audit logs and reports to CSV or PDF format
-- Multi-branch support for car rental franchises
-- Mobile application integration
-- Real-time SMS notifications for rental updates
+**Academic Details:**
+- **Course:** IT-2111 Object Oriented Programming
+- **Institution:** Batangas State University
+- **Instructor:** Ms. Christiana Grace Alib
+- **Date:** December 2024
 
 ---
 
-## References
+## 🚀 Future Enhancements
+
+- [ ] Persistent database storage (MySQL/PostgreSQL)
+- [ ] Graphical User Interface (JavaFX/Swing)
+- [ ] Rental pricing calculations and payment tracking
+- [ ] Date/time tracking with automatic late fees
+- [ ] Advanced search and filter capabilities
+- [ ] Email/SMS notifications
+- [ ] Export reports to CSV/PDF
+- [ ] Multi-branch support
+- [ ] Mobile application integration
+- [ ] Dashboard analytics and statistics
+
+---
+
+## 📚 References
 
 - [Java Documentation](https://docs.oracle.com/en/java/)
-- [MessageDigest (SHA-256) - Java API](https://docs.oracle.com/javase/8/docs/api/java/security/MessageDigest.html)
-- Object-Oriented Programming Principles: Course materials and lecture notes
-- Java Collections Framework Documentation
-- Best Practices in Software Design Patterns
+- [MessageDigest (SHA-256) API](https://docs.oracle.com/javase/8/docs/api/java/security/MessageDigest.html)
+- [Java Collections Framework](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/)
+- Object-Oriented Programming Course Materials - Batangas State University
+- Software Design Patterns Best Practices
 
 ---
 
-## License
+## 📄 License
 
-This project is created for educational purposes as part of IT-2111 Object Oriented Programming course at Batangas State University.
+This project is created for **educational purposes** as part of the IT-2111 Object-Oriented Programming course at Batangas State University.
 
 ---
 
-**⭐ If you find this project helpful, please consider giving it a star!**
+## Contributing
+
+This is an academic project, but feedback and suggestions are welcome! Feel free to:
+- Report bugs via Issues
+- Suggest improvements
+- Fork and experiment
+
+---
+
+## 📞 Contact
+
+For questions or collaboration:
+- **GitHub:** [Your GitHub Profile]
+- **Email:** [Your Email]
+
+---
+
+<div align="center">
+
+### ⭐ If you find this project helpful, please consider giving it a star!
+
+**Made with ☕ by BatStateU IT Students**
+
+</div>
